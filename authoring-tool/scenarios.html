@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Scenarios</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/fontello.css">
+
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+        <!-- JQUERY UI -->
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <!-- FORM VALIDATION PLUGIN-->
+        <script src="js/jquery.validate.js"></script>
+
+        <!-- CUSTOM JS -->
+        <script src="js/main.js"></script>
+
+        <script>
+    
+        //List Scenario Creation
+    
+        $(window).load(function(){
+            
+            function ajaxRequest(){
+             var activexmodes=["Msxml2.XMLHTTP", "Microsoft.XMLHTTP"] //activeX versions to check for in IE
+             if (window.ActiveXObject){ //Test for support for ActiveXObject in IE first (as XMLHttpRequest in IE7 is broken)
+              for (var i=0; i<activexmodes.length; i++){
+               try{
+                return new ActiveXObject(activexmodes[i])
+               }
+               catch(e){
+                //suppress error
+               }
+              }
+             }
+             else if (window.XMLHttpRequest) // if Mozilla, Safari etc
+              return new XMLHttpRequest()
+             else
+              return false
+            }
+
+            function fillScenariosFromDB(tableID){
+                $('.guide').hide();
+                
+                console.log('test scenario load'); 
+                var data_path = "/userscenarios"; //Maybe to change: not the same file name
+                var http_request = ajaxRequest();
+                http_request.onreadystatechange  = function(){
+                    if (http_request.readyState == 4  ) {
+                        $('#loading').hide();
+                        var jsonData = JSON.parse(http_request.responseText);
+
+                        if (jsonData.scenarios.length === 0) {
+                            $('.guide').show();
+                        }
+
+                        for (var s in jsonData.scenarios) {
+
+                            var scenario = jsonData.scenarios[s];
+                            var scenarioHTML = '<div class="scenario" id="'+scenario.id+'"><h2>'+scenario.title+'</h2><span class="type">'+scenario.organizationType+'</span><div class="icons"><div class="icon icon-cancel"></div><div class="icon icon-pencil-1"></div></div><span class="time">'+scenario.startDate+' - '+scenario.endDate+'</span></div>';
+
+                            $('#scenarios').append(scenarioHTML);
+                            $('#loading').hide();
+                            //fields in scenario object: id, title, organizationType, description, screenData, startDate, endDate, userId
+                        }
+                    }
+                }
+                http_request.open("GET", data_path, true);
+                http_request.send();
+            };
+
+
+            fillScenariosFromDB('sort');
+        });
+        
+        
+        //End List Scenario Creation
+        
+        </script>
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="wrapper">
+            <div class="content">
+                <div id="header">
+                    <div id="top">
+                        <div id="username"></div>
+                        <a id="logout" class="cross" href="/logout">Logout</a>
+                    </div>
+                    <h1>Your Scenarios</h1>
+                    <a href="editor.html"><div class="button green"><div class="icon icon-plus"></div>New Scenario</div></a>
+                </div>
+                <div id="scenarios"></div>
+                <div class="guide" id="no-scenarios">It seems like you haven't created any scenarios yet, click on <em>New Scenario</em> to start</div>
+                <div class="guide" id="arrow"></div>
+                <div id="loading"></div>
+            </div>
+        </div>
+    </body>
+</html>

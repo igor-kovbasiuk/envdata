@@ -1,0 +1,154 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Sensor 2</title> 
+	
+	<meta name="viewport" content="width=device-width initial-scale=1 minimum-scale=1 maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+	
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+	
+	<script src="mobile.js"></script>
+	<link rel="stylesheet" href="mobile.css" />
+	
+</head> 
+
+<body> 
+<!-- <a href="#Scenarios" data-role="button" data-theme="b" data-transition="pop">Login</a> -->
+
+<!-- Mock-up of scenarios list page -->
+<div data-role="page" id="Scenarios" data-theme="a">
+	<div data-role="header"  data-theme="b">
+		<h1>Home page</h1>
+	</div>
+	<div data-role="content" >	
+		<input type="search" name="search" id="search" />
+		<ul id="scenarios-list" data-role="listview" data-inset="true" data-theme="a">
+			<li data-role="list-divider" role="heading">Choose scenario</li>
+			
+			
+			<script>
+            	fillScenariosFromDB('scenarios-list');
+      </script>
+			
+		</ul>
+	</div>
+	<div data-role="footer">				
+
+	</div>
+</div>	
+
+<!-- Mock-up of possible page design for scenario -->
+<div data-role="page" id="Scenario_Detail_View" data-theme="a">
+	<div data-role="header"  data-theme="b">
+		<a href="#Scenarios" data-role="button" data-icon="arrow-l" data-transition="slide" data-direction="reverse">All</a>
+		<h1>DataSet A</h1>
+	</div>
+	<div data-role="content" data-theme="a">
+		<h5 style="text-align:right">created<b> Nov, 26</b></h5>
+		
+		<div class="border">
+			<b>Text Title: </b>Water (Lake 7)
+		</div>
+		
+		<div class="border">
+			<b>Text Title</b>
+			</p>here is a text information block that describes this set of data
+		</div>
+		<div class="border">
+			<label for="picture"><b>Image Title</b></label>
+			</p>
+			<div style=" text-align:center">
+				<img id="picture" style="width: 250px; height: 250px" src="http://www.allskull.com/wp-content/uploads/2010/08/waterpollution.jpg">
+			</div>
+			image description text
+		</div>	
+	</div>
+	<div data-role="footer" data-theme="a">				
+		<h3>
+            Screen 1 of 3
+        </h3>
+        <a data-role="button" href="#Scenario_Detail_View" data-icon="arrow-l" data-iconpos="left" 
+        class="ui-btn-left">
+            Prev
+        </a>
+        <a data-role="button" href="#Scenario_Detail_View" data-icon="arrow-r" data-iconpos="right" 
+        class="ui-btn-right">
+			Next
+        </a>
+	</div>
+</div>
+
+<!-- Page for providing an example of functionalities of rendering XForm scenario and saving it with user data -->
+<div data-role="page" id="Sample_Data" data-theme="a">
+	<div data-role="header"  data-theme="b">
+		<a href="#Scenarios" data-role="button" data-icon="arrow-l" data-transition="slide" data-direction="reverse">All</a>
+		<h1>Sample Data</h1>
+		<a id="save_btn" data-role="button" data-icon="star" onclick="save_Input()">Save</a>
+	</div>
+	<div data-role="content" data-theme="a">
+		<div id="renderContent"></div>
+	</div>
+	<div data-role="footer" data-theme="a">				
+
+	</div>
+</div>
+
+<!-- Page for GPS functionality example -->
+<div data-role="page" id="GPS_data" data-theme="a">
+	<div data-role="header"  data-theme="b">
+		<a href="#Scenarios" data-role="button" data-icon="arrow-l" data-transition="slide" data-direction="reverse">All</a>
+		<h1>More Data</h1>
+		<a data-role="button" id="btn" onclick="alert('Works!')" data-icon="star">Map</a>
+	</div>
+	<div data-role="content" data-theme="a">
+		<span> Latitude : </span> <span id=lat></span> <br />
+		<span> Longitude : </span> <span id=lng></span> <br />
+		<div id="map"></div>
+	</div>
+	<div data-role="footer" data-theme="a">				
+
+	</div>
+</div>
+
+<!-- Mock-up of possible design for creating new scenario page-->
+<div data-role="page" id="New_Scenario" data-theme="a">
+
+    <div data-role="header"  data-theme="b">
+		<a href="#Scenarios" data-role="button" data-icon="arrow-l" data-transition="slide" data-direction="reverse">Cancel</a>
+			<h1>New Scenario</h1>
+    </div>
+
+    <div data-role="content"  data-theme="a">
+		<div data-role="fieldcontain">
+			<center><label for="text">Screen 1 of 1</label></center>
+			<input type="text" name="text" id="text" placeholder="Scenario Title"/>
+			
+			<p/>
+			<div>
+			<h4>TextData</h4>
+			This a text information block, a user can add data blocks and choose between types
+			</div>
+			<p/>
+			
+			<select name="select-choice-1" id="select-choice-1">
+	 		   <option value="Add Data of Type">New Data of Type</option>
+			</select>
+			
+			<a href="index.html" data-role="button">Add Screen</a>
+			<a href="index.html" data-role="button" data-theme="b">Save</a>
+		</div>
+	</div>		
+    <div data-role="footer" >
+		   
+	</div>
+</div>
+
+</body>
+</html>

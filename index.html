@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>appName</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="authoring-tool/css/normalize.min.css">
+        <link rel="stylesheet" href="authoring-tool/css/main.css">
+        <link rel="stylesheet" href="authoring-tool/css/style.css">
+        <link rel="stylesheet" href="authoring-tool/css/fontello.css">
+
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic' rel='stylesheet' type='text/css'>
+
+        <script src="authoring-tool/js/vendor/modernizr-2.6.2.min.js"></script>
+
+         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+        <!-- JQUERY UI -->
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <!-- FORM VALIDATION PLUGIN-->
+        <script src="authoring-tool/js/jquery.validate.js"></script>
+
+        <!-- CUSTOM JS -->
+        <script src="authoring-tool/js/main.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="wrapper">
+            <div class="content">
+                
+                <div id="logo">
+                    <img src="authoring-tool/img/logo2.png"/>
+                    <h3>NatureGuard</h3>
+                </div>
+                <div id="phone-link">
+                    <span id="phone" class="icon-mobile-1"></span>
+                    <a id="mobile-link" href="mobile.html">Input data</a>
+                </div>
+                <div id="login">
+                    <h4>LOGIN</h4>
+                    <form action="/login" method="POST" data-ajax="false" required>
+                        <input name="Login" type="text" placeholder="Your username" required>
+                        <input name="Password" type="password" placeholder="Your password" required>
+                        <button class="button green"><div class="icon icon-login"></div>Sign in</button>
+                    </form>
+                </div>
+                <div id="register">
+                    <h4>REGISTER</h4>
+                    <form id="reg_form" onsubmit="checkPasswords();" action="/registeruser" method="POST" data-ajax="false">
+                        <input name="reg_e_mail" type="text" placeholder="Your email" required>
+                        <input name="reg_login" type="text" placeholder="Choose a username" required>
+                        <input id="reg_password" name="reg_password" type="password" placeholder="Choose a password" required>
+                        <input id="reg_password2" name="reg_password2" type="password" placeholder="Confirm password" required>
+                        <button type="button" class="button blue"><div class="icon icon-edit"></div> Sign up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

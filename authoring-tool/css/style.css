@@ -1,0 +1,745 @@
+body {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  background: #494949;
+}
+ 
+.wrapper {
+  position: absolute;
+  width: 97.75%;
+  height: 96%;
+  top: 2%;
+  left: 1%;/*
+  transform: translate(-50%, -50%);*/
+  background: #f5f5f5;
+  overflow: scroll;
+}
+
+.content {
+    width: 960px;
+    margin: 0px auto;
+    position: relative;
+}
+
+#logo {
+    padding-top: 4%;
+    background: #fff;
+    width: 220px;
+    height: 150px;
+    margin: 0px auto;
+}
+
+#logo h3 {
+    margin-top: 10px;
+    font-weight: 900;
+}
+
+#login {
+    width: 50.5%;
+    margin-top: 120px;
+    float: left;
+    border-right: 1px solid #ddd;
+}
+
+#login p.error {
+    display: none;
+    color: red;
+}
+
+#register p.error {
+    display: none;
+    color: red;
+}
+
+#register {
+    width: 49%;
+    margin-top: 00px;
+    float: right;
+}
+
+#login h4,
+#register h4 {
+    font-weight: 700;   
+    color: #ccc; 
+}
+
+form {
+    width: 282px;
+    margin: 0px auto 0px;
+}
+
+form input[type=text],
+form input[type=password]{
+    width: 240px;
+    height: 60px;
+    padding: 0px 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+}
+
+form button{
+    border: 0px none;
+    height: 50px!important;
+    padding-top: 8px!important;
+}
+
+form button .icon{
+    padding-top: 16px!important;
+}
+
+form button.blue .icon{
+    padding-left: 4px!important;
+    padding-top: 17px!important;
+}
+
+.button {
+    height: 36px;
+    padding-top: 14px;
+    margin-top: 31px;
+    float: right;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 18px;
+    box-shadow: 0 4px #9f9f9f;
+}
+
+.button:hover {
+    box-shadow: 0 3px #9f9f9f;
+    cursor: pointer;
+    margin-top: 32px;
+}
+
+.button:active {
+    box-shadow: 0 1px #9f9f9f;
+    cursor: pointer;
+    margin-top: 34px;
+}
+
+.button.green {
+    width: 190px;
+    background: #6adb9a;
+    padding-left: 40px;
+}
+
+.button.blue {
+    width: 190px;
+    background: #99c3e0;
+    padding-left: 40px;
+}
+
+.button.grey {
+    width: 220px;
+    background: #bdc3c7;
+    padding-left: 40px;
+    margin-top: 12px;
+}
+
+#scenario-head .button {
+    width: 120px;
+    background: #6adb9a;
+    padding-left: 40px;   
+    float: right;
+    margin-top: 25px;
+}
+
+#scenario-head .button:hover {
+    margin-top: 26px;
+}
+
+#scenario-head .button:active {
+    margin-top: 28px;
+}
+
+aside .button:hover {
+    margin-top: 13px;
+}
+
+aside .button:active {
+    margin-top: 15px;
+}
+
+.button .icon {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 40px;
+    height: 39px;
+    font-size: 21px;
+    padding-top: 11px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.button.green .icon {
+    border-right: 1px solid #65ca90;
+    background: #68d295;    
+}
+
+.button.blue .icon {
+    border-right: 1px solid #8eb3cc;
+    background: #95bcd8;    
+}
+
+.button.grey .icon {
+    border-right: 1px solid #b0b5b9;
+    background: #b7bcbf;    
+}
+
+/* SCENARIOS ----------------------------- */
+
+#header {
+    padding-top: 75px;  
+    height: 120px;
+}
+
+#header #top {
+    position: absolute;
+    top: 25px;
+    right: 0px;
+    z-index: 1;
+}
+
+#header #top #username {
+    font-weight: 700;
+    position: absolute;
+    right: 110px;
+    top: 0px;
+}
+
+.cross {
+    font-weight: 700;
+    color: #ccc;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 0 5px;
+
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+.cross::before,
+.cross::after {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 50%;
+    height: 2px;
+    margin-top: -1px;
+    background: #ccc;
+    content: '';
+    z-index: -1;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    pointer-events: none;
+}
+
+.cross::before {
+    -webkit-transform: translateY(-20px);
+    -moz-transform: translateY(-20px);
+    transform: translateY(-20px);
+}
+
+.cross::after {
+    -webkit-transform: translateY(20px);
+    -moz-transform: translateY(20px);
+    transform: translateY(20px);
+}
+
+.cross:hover,
+.cross:focus {
+    color: #000;
+}
+
+.cross:hover::before,
+.cross:hover::after,
+.cross:focus::before,
+.cross:focus::after {
+    opacity: 0.7;
+}
+
+.cross:hover::before,
+.cross:focus::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background: #e74c3c;
+}
+
+.cross:hover::after,
+.cross:focus::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    background: #e74c3c;
+}
+
+#scenario-head a {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+}
+
+#header h1 {
+    float: left;
+    font-size: 48px;
+    font-weight: 700;
+    color: #494949;
+}
+
+#scenarios {
+    width: 960px; 
+    margin: 0px;
+}
+
+.scenario {
+    position: relative;
+    width: 910px;
+    height: 22px;
+    padding: 20px 25px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    opacity: 0.7;
+    overflow: hidden;
+    margin-top: 10px;
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -ms-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+}
+
+.scenario:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.scenario h2{
+    font-weight: 400;
+}
+
+.scenario span.time {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: #ccc;
+    font-size: 18px;
+    font-weight: 300;
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -ms-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+}
+
+.scenario span.type {
+    float: left;
+    color: #333;
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.scenario h2 {
+    float: left;
+    margin: 0px;
+    font-size: 18px;
+}
+
+.scenario:hover span.time{
+    right: 120px;
+}
+
+.scenario:hover .icons{
+    right: 20px;
+}
+
+.scenario .icons{
+    font-size: 21px;
+    position: absolute;
+    top: 20px;
+    right: -85px;
+    width: 80px;
+    border-left: 1px solid #eee;
+    margin-top: -3px;
+    margin-left: 200px;
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -ms-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+    z-index: 10;
+}   
+
+.scenario .icons .icon{
+    float: right;
+    margin-left: 5px;
+    color: #2980b9;
+}   
+
+.icon.icon-cancel {
+    color: #000000!important;
+}
+
+.icon.icon-cancel:hover {
+    color: #c0392b!important;
+}
+
+/* EDITOR ----------------------------- */
+
+#scenario-head {
+    width: 960px;
+    margin-top: 30px;
+    height: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+#scenario-head input{
+    text-align: left;
+    float: left;
+    font-size: 21px;
+    height: 20px;
+    width: 740px;
+    padding: 4px 10px;
+    margin-top: 50px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+aside {
+    width: 260px;
+    position: absolute;
+    top: 90px;
+    left: 0px;
+}
+
+aside #sidebar {
+    border: 1px solid #eee;
+    border-radius: 10px;    
+    display: block;
+    overflow: hidden;
+}
+
+.nav-item {
+    display: block;
+    width: 220px;
+    text-align: left;
+    height: 40px;
+    padding: 17px 20px 0px 20px;
+    border-bottom: 1px solid #eee;
+    background: #f2f2f2;
+    font-size: 18px;
+    color: #ababab;
+}
+
+.nav-item span {
+    margin-right: 10px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #ababab;
+}
+
+.nav-item:hover a {
+    color: #333;
+}
+
+.nav-item.active a {
+    color: #000;
+}
+
+.nav-item:hover {
+    background: #f6f6f6;
+    cursor: pointer;
+    color: #333;
+}
+
+.nav-item.active {
+    background: #fff;
+    color: #000;
+}
+
+.screen {
+    width: 620px;
+    height: 490px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px; 
+    position: absolute;
+    top: 90px;
+    right: 0px;
+    text-align: left;
+    padding: 30px;
+    display: none;
+    z-index: 1;
+}
+
+.screen.active {
+    display: block;
+}
+
+#default-fields h2 {
+    margin: 0px;
+    font-size: 21px;
+    padding-left: 5px;
+}
+
+#default-fields input {
+    font-size: 18px;
+    height: 20px;
+    width: 600px;
+    padding: 4px 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+#default-fields input[type=date] {
+    width: 275px;
+    float: left;
+}
+
+#default-fields span {
+    float: left;
+    font-size: 21px;
+    margin-top: 10px;
+    width: 30px;
+    text-align: center;
+    color: #ccc;
+}
+
+#element-panel{
+    position: absolute;
+    top: 91px;
+    right: 1px;
+    background: #f9f9f9;
+    width: 200px;
+    padding-top: 0px;
+    height: 530px;
+    z-index: 2;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: 1px solid #eee;
+    /*overflow: hidden;*/
+    display: none;
+}
+
+#element-panel.active {
+    display: block;
+}
+
+.element{
+    width: 200px;
+    height: 61px;
+    position: relative;
+    cursor: move;
+}
+
+.element div {
+    width: 200px;
+    /*margin: 0 20px;*/
+    height: 40px;
+    padding-top: 20px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #eee;
+    -moz-box-shadow:    inset 0 0 3px #999;
+    -webkit-box-shadow: inset 0 0 3px #999;
+    box-shadow:         inset 0 0 3px #999;
+    border-bottom: 1px dashed #ccc;
+    font-size: 18px;
+}
+
+.element div.draggable{
+    background: #f9f9f9;
+    -moz-box-shadow:    none;
+    -webkit-box-shadow: none;
+    box-shadow:         none;
+    border-bottom: 1px dashed #ccc;
+}
+
+.scenario-element{
+    width: 385px;
+    padding: 10px 15px;
+    margin-top:10px;
+    cursor: move;
+    border: 1px dashed #bbb;
+    position: relative;
+    z-index: 0;
+}
+
+.scenario-element input[type=text].label{
+    border: 0px none;
+    background: none;
+    margin-bottom: 5px;
+}
+
+/* styling for option to make element required */
+
+.scenario-element div.required-switch{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.scenario-element div.required-switch input[type="checkbox"]{
+    float: right;
+    margin-top: 1px;
+}
+
+.scenario-element div.required-switch span{
+    float: right;
+    margin-right: 7px;
+    font-size: 12px;
+    color: #999;
+}
+
+
+.scenario-element span.icon-plus{
+    margin-left: 0px;
+}
+
+
+/* Delete Element */
+
+#delete-element {
+    width: 478px;
+    height: 30px;
+    position: absolute;
+    position: absolute;
+    bottom: -581px;
+    right: 203px;
+    text-align: center;
+    font-size: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /*background: #FFD3E0;*/
+    border-bottom-left-radius: 10px;
+    z-index: 10;
+    color: #FF3A2D;
+    display: none;
+}
+
+#delete-element span{
+    margin-right: 20px;
+}
+
+#delete-element .guide{
+    display: none;
+    font-size: 14px;
+    color: #999;
+    font-weight: 100;
+    position: absolute;
+    top: 0px;
+    left: 130px;
+}
+
+#delete-element:hover .guide{
+    display: block;
+}
+
+#delete-element.active{
+    background: #FF3A2D;
+    color: #fff;
+}
+
+#delete-element.active span{
+    color: #fff;
+}
+
+.nav-item .icon-cancel {
+    float: right;
+    display: none;
+    color: #cc0000;
+}
+
+.nav-item .icon-cancel:hover {
+    float: right;
+    display: none;
+    color: #FF3A2D;
+}
+
+.nav-item:hover .icon-cancel {
+    display: block;
+}
+
+#phone-link {
+    position: absolute;
+    top: 20px;
+    right: 110px;
+    color: #333;
+    opacity: 0.6;
+    border-top: 2px solid #999;
+    border-bottom: 2px solid #999;
+    width: 120px;
+    height: 45px;
+}
+
+#phone-link:hover {
+    opacity: 1;
+}
+
+#phone-link a{
+    font-weight: 700;
+    font-size: 18px;
+    color: #333;
+    position: absolute;
+    text-decoration: none;
+    right: 0px;
+    top: 10px;
+    width: 100px;
+}
+
+#phone-link span {
+    position: absolute;
+    right: 60px;
+    top: 0px;
+    width: 100px;
+    font-size: 32px;
+}
+
+#no-scenarios{
+    position: absolute;
+    top: 280px;
+    left: 260px;
+    font-size: 21px;
+    width: 400px;
+    color: #999;
+    font-weight: 300;
+    display: none;
+}
+
+#arrow{
+    background: url('../img/arrow.png');
+    height: 189px;
+    width: 179px;
+    position: absolute;
+    top: 190px;
+    right: 160px;
+    display: none;
+}
+
+#loading {
+    background: url('../img/ajax-loader.gif') center center;
+    width: 32px;
+    height: 32px;
+    margin: 120px auto 0;
+    position: relative;
+}
+
+
+

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Scenarios</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/fontello.css">
+
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+        
+        <!-- JQUERY UI -->
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <!-- FORM VALIDATION PLUGIN-->
+        <script src="js/jquery.validate.js"></script>
+
+        <!-- CUSTOM JS -->
+        <script src="js/main.js"></script>
+        <script src="js/scenario-save.js"></script>
+        
+
+        <script>
+            
+            $(window).load(function(){
+
+                var element1 = '';
+                var textField1 = '<input type="text" disabled="disabled"/>';
+                var textArea1 = '<textarea disabled="disabled"></textarea>';
+                var image1 = '<button disabled="disabled">Take a Snapshot</button>';
+                var video1 = '<button disabled="disabled">Make a Video</button>';
+                var sound1 = '<button disabled="disabled">Start Recording</button>';
+                var choice1 = '<div class="choices"><input class="1" type="radio" name="choice" value="option1" disabled="disabled"><input class="label" type="text" placeholder="Option 1"/><br><input class="2" type="radio" name="choice" value="option2" disabled="disabled"><input class="label" type="text" placeholder="Option 2"/><br>';
+                var numerical1 = '<input type="number" disabled="disabled"/>';
+                var date1 = '<input type="date" disabled="disabled"/>';
+                var location1 = '<button disabled="disabled">Add Current Location</button>';
+
+                var QueryString = function () {
+                  // This function is anonymous, is executed immediately and 
+                  // the return value is assigned to QueryString!
+                  var query_string = {};
+                  var query = window.location.search.substring(1);
+                  var vars = query.split("&");
+                  for (var i=0;i<vars.length;i++) {
+                    var pair = vars[i].split("=");
+                        // If first entry with this name
+                    if (typeof query_string[pair[0]] === "undefined") {
+                      query_string[pair[0]] = pair[1];
+                        // If second entry with this name
+                    } else if (typeof query_string[pair[0]] === "string") {
+                      var arr = [ query_string[pair[0]], pair[1] ];
+                      query_string[pair[0]] = arr;
+                        // If third or later entry with this name
+                    } else {
+                      query_string[pair[0]].push(pair[1]);
+                    }
+                  } 
+                    return query_string;
+                } ();
+
+                function loadScenario(id){
+                    
+                    //drop functionality
+                    function droppable1(screenID){
+                        //allow dropping new elements into the scenario
+                        $(screenID).droppable({
+                          drop: function( event, ui ) {
+                            var elementName = ui.draggable[0].classList[0];
+                            console.log('dropping, element name: '+elementName);
+                            if(!$(ui.draggable[0]).hasClass('dropped')){
+																
+                                switch (elementName){
+                                    case 'textfield':
+                                        element1 = textField1;           
+                                        break;
+                                    case 'textarea':
+                                        element1 = textArea1; 
+                                        break;
+                                    case 'image':
+                                        element1 = image1; 
+                                        break;
+                                    case 'video':
+                                        element1 = video1; 
+                                        break;
+                                    case 'sound':
+                                        element1 = sound1; 
+                                        break;
+                                    case 'choice':
+                                        element1 = choice1; 
+                                        break;
+                                    case 'numerical':
+                                        element1 = numerical1; 
+                                        break;
+                                    case 'date':
+                                        element1 = date1; 
+                                        break;
+                                    case 'location':
+                                        element1 = location1; 
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                console.log('calling parseElement,  element1=' + element1);
+                                
+                                if (required) {                            
+                                    $(screenID).append('<div class="scenario-element dropped '+ currentElement.type +'"><input class="label" type="text" placeholder="Label" value=""/></br><div class="content required">' + element1 + '</div><div class="required-switch"><input type="checkbox" checked="checked" name="required" value="true"><span>Required</span></div></div>');   
+                                } else {
+                                    $(screenID).append('<div class="scenario-element dropped '+ currentElement.type +'"><input class="label" type="text" placeholder="Label" value=""/></br><div class="content">' + element1 + '</div><div class="required-switch"><input type="checkbox" name="required" value="true"><span>Required</span></div></div>');
+                                } 
+                            }
+                          }
+                        });        
+                    };
+
+                    //make it possible to rearrange elements 
+                    function sortable1(screenID) {
+                        $(screenID).sortable({
+                            connectWith: ".screen",
+                            cursor: "move",
+                            start: function(event, ui) {
+                                is_dragging = true;
+                            },
+                            stop: function(event, ui) {
+                                is_dragging = false;
+                            }
+                        }).disableSelection();
+                    };
+
+                    $('#save-scenario').html('<div class="icon icon-upload-cloud"></div>Update').addClass('update');
+
+                    $.ajax({
+                      type: "GET",
+                      url: '/getscenario?scenario_id=' + id,
+                      success: function(data){
+						console.log('data'+data);
+                        var scenario = JSON.parse(data);
+                        
+                        $('#scenario-title').val(scenario.title);
+                        $('#scenario-type').val(scenario.organizationType);
+                        $('#scenario-start').val(scenario.startDate);
+                        $('#scenario-end').val(scenario.endDate);
+                        $('#scenario-description').val(scenario.description);
+
+                        //TODO: parse screens here
+                        var screenData =  JSON.parse(scenario.screenData);
+                        
+                        for(var i = 0; i < screenData.length; i++) {
+                        
+                       			console.log('screenData');
+														console.log(screenData);
+
+                            var screenNumber = i + 1;
+                            $("#screen-nav").append('<div id="nav'+screenNumber+'" class="dropped nav-item"><span class="icon-mobile-1"></span><a href="#screen'+ screenNumber +'">Screen '+ screenNumber +'</a><span class="icon-cancel"></span></div>');
+                            $('#screens').append('<div id="screen'+screenNumber+'" class="screen block"></div>');            
+                            $("#nav" + screenNumber).droppable({
+                                over: function( event, ui ) {
+                                    var targetId = $(event.target).attr('id').replace('nav', '');
+                                    $("a[href=#screen"+ targetId + "]").trigger('click');
+                                }
+                            });
+														var targetScreen = '#screen'+screenNumber;
+                            droppable1(targetScreen);
+                            sortable1(targetScreen);                
+
+                            var screen = screenData[i];
+                            
+                            console.log('screen, screen.length='+screen.length);
+														console.log(screen);
+
+
+                            for (var j = 0; j < screen.screenElements.length; j++) {
+
+                                
+                                var currentElement = screen.screenElements[j];
+                                console.log('element #'+j+' is '+currentElement);
+                                console.log(currentElement);
+
+                                var required = false;
+                                if (currentElement.required) {
+                                    required = true;
+                                }
+
+                                switch (currentElement.type){
+                                    case 'textfield':
+                                        element1 = textField1;           
+                                        break;
+                                    case 'textarea':
+                                        element1 = textArea1; 
+                                        break;
+                                    case 'image':
+                                        element1 = image1; 
+                                        break;
+                                    case 'video':
+                                        element1 = video1; 
+                                        break;
+                                    case 'sound':
+                                        element1 = sound1; 
+                                        break;
+                                    case 'choice':
+                                        element1 = choice1; 
+                                        break;
+                                    case 'numerical':
+                                        element1 = numerical1; 
+                                        break;
+                                    case 'date':
+                                        element1 = date1; 
+                                        break;
+                                    case 'location':
+                                        element1 = location1; 
+                                        break;
+                                    default:
+                                        break;
+                                }
+								
+                                console.log('calling parseElement,  element1=' + element1);
+
+                                if (required) {                            
+                                    $(targetScreen).append('<div class="scenario-element dropped '+ currentElement.type +'"><input class="label" type="text" placeholder="Label" value="'+currentElement.title+'"/></br><div class="content required">' + element1 + '</div><div class="required-switch"><input type="checkbox" checked="checked" name="required" value="true"><span>Required</span></div></div>');   
+                                } else {
+                                    $(targetScreen).append('<div class="scenario-element dropped '+ currentElement.type +'"><input class="label" type="text" placeholder="Label" value="'+currentElement.title+'"/></br><div class="content">' + element1 + '</div><div class="required-switch"><input type="checkbox" name="required" value="true"><span>Required</span></div></div>');
+                                } 
+
+                            }
+                        }
+
+
+                      }
+                    });
+                };
+
+                if (QueryString.id) {
+                    $('#scenario-head').addClass(QueryString.id);
+                    loadScenario(QueryString.id);      
+                }
+                else {
+                    console.log('new');
+                }
+
+            });
+            
+        </script>
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="wrapper">
+            <div class="content">
+                <div id="element-panel">
+                    <div class="element">
+                        <div class="icon-text-height">Textfield</div>
+                        <div class="textfield draggable icon-text-height">Textfield</div>
+                    </div>
+                    <div class="element">
+                        <div class="icon-doc-text">Textarea</div>
+                        <div class="textarea draggable icon-doc-text">Textarea</div>
+                    </div>
+                    <div class="element">
+                        <div class="icon-camera-alt">Image</div>
+                        <div class="image draggable icon-camera-alt">Image</div>
+                    </div>
+                    <div class="element">
+                        <div class="icon-camera">Video</div>
+                        <div class="video draggable icon-camera">Video</div>
+                    </div>
+                    <div class="element">
+                        <div class="icon-volume-down">Sound</div>
+                        <div class="sound draggable icon-volume-down">Sound</div>
+                    </div> 
+                    <div class="element">
+                        <div class="icon-list">Choice</div>
+                        <div class="choice draggable icon-list">Choice</div>
+                    </div>
+                    <div class="element">
+                        <div class="icon-sort-numeric">Numerical</div>
+                        <div class="numerical draggable icon-sort-numeric">Numerical</div>
+                    </div>
+                    <div class="element">
+                        <div class="icon-calendar">Date</div>
+                        <div class="date draggable icon-calendar">Date</div>
+                    </div>
+                    <div class="element">
+                        <div class="icon-location">Location</div>
+                        <div class="location draggable icon-location">Location</div>
+                    </div> 
+                </div>
+                <div id="scenario-head">
+                    <a id="cancel" class="cross" href="scenarios.html">Cancel</a>
+                	<input id="scenario-title" type="text" placeholder="How do you want to call your scenario?"/> 
+                	<div id="save-scenario" class="button green"><div class="icon icon-upload-cloud"></div>Publish</div>
+                    <p id="error-message"></p>
+                </div>
+                <aside>
+                    <div id="sidebar">
+    					<div id="information">
+    						<div class="nav-item active"><span class="icon-info"></span>Information</div>
+    					</div>
+    					<div id="screen-nav"></div> 
+                    </div>
+                    <div id="add-screen" class="button grey"><div class="icon icon-plus"></div>Add new screen</div>
+                </aside>
+                <div id="screens">
+                    <div id="delete-element"><span class="icon-trash"></span><div class="guide">Drag elements here to delete them</div></div>
+                    <div id="default-fields" class="screen active">
+                        <h2>Organization Type</h2>
+                        <input id="scenario-type" type="text" placeholder="What organization are you from"/> 
+                        <h2>Duration</h2>
+                        <input id="scenario-start" type="date" placeholder="When does it start?"/><span>-</span><input  id="scenario-end" type="date" placeholder="When does it start?"/> 
+                        <h2>Description</h2>
+                        <input id="scenario-description" type="text" placeholder="How would you describe it? (optional)"/> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

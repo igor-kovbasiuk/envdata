@@ -1,0 +1,22 @@
+.border { 
+	border: 1px #ddddda solid;
+	border-radius: 20px;	
+	padding: 10px;
+	margin: 5px;
+	}
+.start_text{
+	width: 100%;
+	font-weight: bold;
+	margin-top: 0px;
+	text-align: center;
+	font-size: 22px;
+	}
+.start_sub_text{
+	margin-top: 20px;
+	width: 100%;
+	color: #A0A0A0;
+	text-align: center;
+	font-size: 12px;
+	}	
+.ui-btn.ui-btn-a:visited{background:#ffcc33 ;border-color:#8c701c ;color:#ffffff ;text-shadow:0  1px  0  #eeeeee ;}	
+.ui-btn.ui-btn-a:hover{background:#45ce6e ;border-color:#25713c ;color:#ffffff ;text-shadow:0  1px  0  #444444 ;}

@@ -1,0 +1,28 @@
+<web-app version="3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xsi:schemalocation="http:/java.sun.com/dtd/web-app_2_3.dtd">
+  
+<servlet>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>se.lnu.stp.sensors2.AppServlet</servlet-class>
+<!-- <servlet-class>test.HelloServlet</servlet-class> -->
+
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern></url-pattern>
+    <url-pattern>/logout</url-pattern>
+    <url-pattern>/userscenarios</url-pattern>
+    <url-pattern>/allscenarios</url-pattern>
+    <url-pattern>/getscenario</url-pattern>
+    <url-pattern>/deletescenario</url-pattern>
+    <url-pattern>/getscenarioxform</url-pattern>
+    <url-pattern>/initdatabase</url-pattern>
+    <url-pattern>/mobile</url-pattern>
+    <url-pattern>/login</url-pattern>
+    <url-pattern>/registeruser</url-pattern>
+    <url-pattern>/savefilledscenario</url-pattern>
+    <url-pattern>/savescenario</url-pattern>
+  </servlet-mapping>
+
+  
+</web-app>
